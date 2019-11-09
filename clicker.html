@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+
+<html>
+
+
+    <head>
+        <meta charset="utf-8" />
+        <script src="./jquery/jquery-3.4.1.min.js"></script>
+
+        <script>
+            var globalCount = 0;
+            var globalPhraseToSearch = "change";
+        </script>
+
+
+    </head>
+    <body>
+
+        <div id="Block1" style="background:aqua">
+            Let's Roll.
+        </div>
+        <input type="button" onclick="changeColor();" value="Change" />
+        <input type="button" onclick="changeColor();" value="I want to change it too!" />
+        <p> First page. </p>
+        <input type="button" onclick="changeColor();" value="Pleeease let me ChAnGe itttt..." />
+        <!--<a href="./second.html" id="GoToSecondPage">To second page</a>
+        <script>
+            var elem = document.getElementById("GoToSecondPage");
+            if (elem != null) {
+                if (elem.click != undefined) {
+                    elem.click();
+                }
+            }
+        </script>-->
+        <script>
+                function changeColor() {
+                    var b1 = document.getElementById("Block1");
+                    if (b1.style.background.startsWith("aqua")) {
+                        b1.style.background = "yellow";
+                    } else {
+                        b1.style.background = "aqua";
+                    }
+                    globalCount += 1;
+                    b1.textContent = "Let's Roll " + globalCount;
+                }
+        </script>
+
+        <!-- Example is here. -->
+
+        <script>
+            $('*').filter(
+                function () { return this.type == "button" && this.value.toLowerCase().includes(globalPhraseToSearch) } 
+            )
+            .each(
+                function (idx) {
+                    this.click();
+                }
+            );
+        </script>
+
+    </body>
+</html>
+
+
