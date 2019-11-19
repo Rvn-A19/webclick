@@ -9,7 +9,7 @@
 
         <script>
             var globalCount = 0;
-            var globalPhraseToSearch = "change";
+            var globalDictionary = "conclusion\nawait\nbulky\nincompressible\neconometric\nmerchants\nindisputable\nsoils\nconjures\nwharf\nfinn\nbreakfasters\nremovals\nworkhorse\nlaser's\nlesson's\nthiouracil\nmarlborough\nstalwartly\nbagpipe\nbranchings\nsprawls\nergo\noutweigh\nsilicate\nexemplified\nturnover\nfunneled\nsou\nindeterminable\nbalzac\ninfract\nbarrette\nheeling\nunexpectedly\nblutwurst\nworshiping\nfootprint's\nshortages\nseized\npretended\nbotanical\nwrecked\npurrs\nsent\npertinant\ni's\nsander\ndinner's\nzardoz\nthankful\nlaughing\nameliorating\ndade\nplanners\nsammie\nvictimizing\nknickerbocker's\nconnoisseurs\nyoungster's\nlaurels\nstaggering\nhammer\nrectums\nparametric\nheavenward\nrivet\nrealer\npreachy\ncolander\nrwanda\ngaston\njests\ndeem\nmanager's\ndivulge\nground\npedal\ncharmers\nsleeping\nmasochism\nshagging\npatrol's\nrested\ntanning\njesuit\ntireless\nmotherhood\nworkmen\ncoyote\nreducibly\nconnecticut\novertaker\ntopsoil\ndecorated\nabsorbing\nbluntness\nretrofit\nletsdoit\nreducible\nliability\nclog\nmiserable\nfaint\nthreatened\nstraw's\nworkpiece\ntransferrers\nappleton\npep\nvelvety\nlamed\nsledding\nalterable\nuncles\nladle\nbijective\nimpatient\ndefinitive\nairers\nchimeric\nmuriatic\npayer's\ncorporal's\nbarrymore\nbeverage\nunsynchronized\ntried\ndailies\naccurate\nbtnjey\nsiberia\nanything\nsorghum\nattacks\nbulldoze\nfell\nleathery\nsquabbles\nwools\nfutility\nleft\nregistrations\ncommentaries\nrobs\ncasings\nlucrative\nregeneration\nenrollee\njewels\nwail\naegean\ncamaross\napocalypse\nunprojected\nbemoaning\ngeneralities\nbookcase\nvisible\nhoydenish\nrecovery\nstrong\ncriticisms\nmitten\nmaserati\novertaking\nmodernness\npremium's\nyeomanry\ninterchangings\nrotting\naccredited\nfrankly\nprides\nhrothgar\npepperoni\nslicker\nlou\ndisappoint\naffection\nmuskegon\nconcealing\naccompanied\nmarvels\nleagues\nsatellites\npuckering\nopposites\ntraditional\nthrong's\nverbatim\npreacher\nexcresence\nstarlet\nspin\nwasteland\nla\nevaluates\ntrapped\nqualm\nbuffalo"
         </script>
 
 
@@ -19,19 +19,10 @@
         <div id="Block1" style="background:aqua">
             Let's Roll.
         </div>
-        <input type="button" onclick="changeColor();" value="Change" />
-        <input type="button" onclick="changeColor();" value="I want to change it too!" />
+        <input type="button" onclick="changeColor();" value="Change workpiece" />
+        <input type="button" onclick="changeColor();" value="I want to change it too! (workpiece)" />
         <p> First page. </p>
         <input type="button" onclick="changeColor();" value="Pleeease let me ChAnGe itttt..." />
-        <!--<a href="./second.html" id="GoToSecondPage">To second page</a>
-        <script>
-            var elem = document.getElementById("GoToSecondPage");
-            if (elem != null) {
-                if (elem.click != undefined) {
-                    elem.click();
-                }
-            }
-        </script>-->
         <script>
                 function changeColor() {
                     var b1 = document.getElementById("Block1");
@@ -48,14 +39,29 @@
         <!-- Example is here. -->
 
         <script>
-            $('*').filter(
-                function () { return this.type == "button" && this.value.toLowerCase().includes(globalPhraseToSearch) } 
-            )
-            .each(
-                function (idx) {
-                    this.click();
+            var start = performance.now();
+
+            function clickByContent(textToSearch) {
+                var target = undefined;
+                $('input').each(
+                    function () { 
+                        if (this.value.toLowerCase().includes(textToSearch)) { 
+                            target = this;
+                            return false; 
+                        } 
+                        return true;
+                    }
+                );
+                if (target != undefined) {
+                    console.log(target);
+                    target.click();
                 }
-            );
+            }
+
+            var words = globalDictionary.split("\n");
+            $(words).each( function() { clickByContent(this); } );
+            
+            console.log("Execution time: " + (performance.now() - start) + " ms.");
         </script>
 
     </body>
